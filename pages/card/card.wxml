@@ -1,0 +1,48 @@
+<view class="card-container">
+  <!-- 名片头部 -->
+  <view class="card-header">
+    <image class="avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+    <view class="user-info">
+      <text class="name">{{userInfo.name}}</text>
+      <text class="title">{{userInfo.title}}</text>
+      <text class="company">{{userInfo.company}}</text>
+    </view>
+  </view>
+  
+  <!-- 联系方式 -->
+  <view class="contact-section">
+    <text class="section-title">联系方式</text>
+    <view class="contact-item" bindtap="makePhoneCall">
+      <image class="contact-icon" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=phone%20icon%20simple%20flat%20design&image_size=square"></image>
+      <text class="contact-text">{{userInfo.phone}}</text>
+    </view>
+    <view class="contact-item" bindtap="sendEmail">
+      <image class="contact-icon" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=email%20icon%20simple%20flat%20design&image_size=square"></image>
+      <text class="contact-text">{{userInfo.email}}</text>
+    </view>
+    <view class="contact-item" bindtap="openWechat">
+      <image class="contact-icon" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wechat%20icon%20simple%20flat%20design&image_size=square"></image>
+      <text class="contact-text">{{userInfo.wechat}}</text>
+    </view>
+  </view>
+  
+  <!-- 个人简介 -->
+  <view class="bio-section">
+    <text class="section-title">个人简介</text>
+    <text class="bio-text">{{userInfo.bio}}</text>
+  </view>
+  
+  <!-- 技能标签 -->
+  <view class="skills-section">
+    <text class="section-title">专业技能</text>
+    <view class="skills-container">
+      <view class="skill-tag" wx:for="{{userInfo.skills}}" wx:key="index">{{item}}</view>
+    </view>
+  </view>
+  
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="action-btn share-btn" bindtap="shareCard">分享名片</button>
+    <button class="action-btn save-btn" bindtap="saveCard">保存名片</button>
+  </view>
+</view>

@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/card/card",
     "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "个人名片",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",
