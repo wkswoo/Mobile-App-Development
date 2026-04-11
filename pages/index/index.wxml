@@ -1,35 +1,28 @@
 <!--index.wxml-->
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <!-- 基本信息 -->
-    <view class="card">
-      <view class="card-title">基本信息</view>
-      <view class="info-item">
-        <text class="info-label">姓名：</text>
-        <text class="info-value">{{name}}</text>
-      </view>
-      <view class="info-item">
-        <text class="info-label">年级：</text>
-        <text class="info-value">{{grade}}</text>
-      </view>
-      <view class="info-item">
-        <text class="info-label">学院：</text>
-        <text class="info-value">{{college}}</text>
+    <!-- 顶部区域：圆形头像占位、姓名、专业年级 -->
+    <view class="top-section">
+      <!-- 圆形头像占位 -->
+      <view class="avatar"></view>
+      <!-- 姓名 -->
+      <text class="name">{{name}}</text>
+      <!-- 专业年级 -->
+      <text class="major-grade">{{college}} {{grade}}</text>
+    </view>
+    
+    <!-- 联系方式区域：用 wx:for 渲染 contacts 数组，每行显示 label 和 value -->
+    <view class="contact-section">
+      <view class="section-title">联系方式</view>
+      <view wx:for="{{contacts}}" wx:key="type" class="contact-item">
+        <text class="contact-label">{{item.label}}：</text>
+        <text class="contact-value">{{item.value}}</text>
       </view>
     </view>
     
-    <!-- 联系方式 -->
-    <view class="card">
-      <view class="card-title">联系方式</view>
-      <view wx:for="{{contacts}}" wx:key="type" class="info-item">
-        <text class="info-label">{{item.label}}：</text>
-        <text class="info-value">{{item.value}}</text>
-      </view>
-    </view>
-    
-    <!-- 个人技能 -->
-    <view class="card">
-      <view class="card-title">个人技能</view>
+    <!-- 技能标签区域：用 wx:for 渲染 skills 数组，横向排列 -->
+    <view class="skills-section">
+      <view class="section-title">个人技能</view>
       <view class="skills-container">
         <view wx:for="{{skills}}" wx:key="index" class="skill-tag">
           {{item}}
@@ -37,17 +30,9 @@
       </view>
     </view>
     
-    <!-- 个人成就 -->
-    <view class="card">
-      <view class="card-title">个人成就</view>
-      <view wx:for="{{achievements}}" wx:key="index" class="achievement-item">
-        <text class="achievement-text">{{item}}</text>
-      </view>
-    </view>
-    
-    <!-- 个人简介 -->
-    <view class="card">
-      <view class="card-title">个人简介</view>
+    <!-- 简介区域：显示 bio 文本 -->
+    <view class="bio-section">
+      <view class="section-title">个人简介</view>
       <text class="bio-text">{{bio}}</text>
     </view>
   </view>

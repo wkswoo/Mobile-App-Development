@@ -13,17 +13,56 @@ page {
 
 .container {
   padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
 }
 
-.card {
+/* 顶部区域：圆形头像占位、姓名、专业年级 */
+.top-section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+/* 圆形头像占位 */
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+/* 姓名 */
+.name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 专业年级 */
+.major-grade {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 通用区域样式 */
+.contact-section,
+.skills-section,
+.bio-section {
   background-color: #fff;
   border-radius: 16rpx;
   padding: 30rpx;
-  margin-bottom: 20rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
 }
 
-.card-title {
+/* 区域标题 */
+.section-title {
   font-size: 32rpx;
   font-weight: bold;
   color: #333;
@@ -32,30 +71,33 @@ page {
   border-bottom: 2rpx solid #f0f0f0;
 }
 
-.info-item {
+/* 联系方式项 */
+.contact-item {
   display: flex;
   margin-bottom: 15rpx;
   align-items: center;
 }
 
-.info-label {
+.contact-label {
   font-size: 28rpx;
   color: #666;
   width: 120rpx;
 }
 
-.info-value {
+.contact-value {
   font-size: 28rpx;
   color: #333;
   flex: 1;
 }
 
+/* 技能标签容器 */
 .skills-container {
   display: flex;
   flex-wrap: wrap;
   gap: 15rpx;
 }
 
+/* 技能标签 */
 .skill-tag {
   background-color: #f0f0f0;
   padding: 10rpx 20rpx;
@@ -64,18 +106,7 @@ page {
   color: #666;
 }
 
-.achievement-item {
-  margin-bottom: 15rpx;
-  padding-left: 20rpx;
-  border-left: 4rpx solid #07c160;
-}
-
-.achievement-text {
-  font-size: 26rpx;
-  color: #333;
-  line-height: 40rpx;
-}
-
+/* 简介文本 */
 .bio-text {
   font-size: 26rpx;
   color: #333;
