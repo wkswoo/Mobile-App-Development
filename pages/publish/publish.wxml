@@ -1,0 +1,57 @@
+<!-- publish.wxml -->
+<view class="container">
+  <view class="form-item">
+    <text class="label">活动图片</text>
+    <view class="image-upload">
+      <view class="image-list">
+        <view class="image-item" wx:for="{{images}}" wx:key="index">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</view>
+        </view>
+        <view class="add-image" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+          <text>+</text>
+        </view>
+      </view>
+      <text class="hint">最多上传9张图片</text>
+    </view>
+  </view>
+  
+  <view class="form-item">
+    <text class="label">活动标题</text>
+    <input 
+      class="input" 
+      placeholder="请输入活动标题" 
+      value="{{title}}" 
+      bindinput="onTitleInput"
+    />
+  </view>
+  
+  <view class="form-item">
+    <text class="label">活动分类</text>
+    <view class="category-picker">
+      <view 
+        class="category-item {{category === '学术' ? 'active' : ''}}" 
+        bindtap="selectCategory" 
+        data-category="学术"
+      >
+        学术
+      </view>
+      <view 
+        class="category-item {{category === '体育' ? 'active' : ''}}" 
+        bindtap="selectCategory" 
+        data-category="体育"
+      >
+        体育
+      </view>
+      <view 
+        class="category-item {{category === '艺术' ? 'active' : ''}}" 
+        bindtap="selectCategory" 
+        data-category="艺术"
+      >
+        艺术
+      </view>
+    </view>
+  </view>
+  
+  <button class="submit-btn" bindtap="submitForm">发布活动</button>
+</view>

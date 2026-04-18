@@ -27,5 +27,10 @@
         </view>
       </view>
     </view>
+    
+    <!-- 悬浮发布按钮 -->
+    <view class="floating-btn" bindtap="navigateToPublish">
+      <text>+</text>
+    </view>
   </view>
 </scroll-view>

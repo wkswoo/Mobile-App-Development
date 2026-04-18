@@ -37,5 +37,12 @@ Page({
       current: images[index],
       urls: images
     });
+  },
+  
+  // 跳转到发布页面
+  navigateToPublish() {
+    wx.navigateTo({
+      url: '/pages/publish/publish'
+    });
   }
 });
