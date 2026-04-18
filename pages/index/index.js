@@ -1,49 +1,95 @@
 // index.js
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
+    // 打卡相关数据
+    records: [], // 打卡记录数组
+    currentRecord: {
+      studyContent: '', // 学习了什么
+      harvest: '', // 收获如何
     },
-    hasUserInfo: false,
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    totalDays: 0, // 累计打卡天数
   },
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+  onLoad() {
+    // 加载已保存的打卡记录
+    this.loadRecords()
   },
-  onChooseAvatar(e) {
-    const { avatarUrl } = e.detail
-    const { nickName } = this.data.userInfo
+  loadRecords() {
+    // 从本地存储加载打卡记录
+    const records = wx.getStorageSync('records') || []
     this.setData({
-      "userInfo.avatarUrl": avatarUrl,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
+      records: records,
+      totalDays: records.length
     })
   },
-  onInputChange(e) {
-    const nickName = e.detail.value
-    const { avatarUrl } = this.data.userInfo
+  // 输入学习内容
+  onStudyContentChange(e) {
     this.setData({
-      "userInfo.nickName": nickName,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
+      "currentRecord.studyContent": e.detail.value
     })
   },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+  // 输入收获
+  onHarvestChange(e) {
+    this.setData({
+      "currentRecord.harvest": e.detail.value
+    })
+  },
+  // 提交打卡
+  submitRecord() {
+    const { studyContent, harvest } = this.data.currentRecord
+    if (!studyContent || !harvest) {
+      wx.showToast({
+        title: '请填写完整信息',
+        icon: 'none'
+      })
+      return
+    }
+    
+    // 创建新的打卡记录
+    const newRecord = {
+      id: Date.now().toString(), // 唯一ID
+      date: new Date().toISOString().split('T')[0], // 打卡日期，格式：YYYY-MM-DD
+      studyContent: studyContent,
+      harvest: harvest
+    }
+    
+    // 更新记录数组
+    const updatedRecords = [newRecord, ...this.data.records]
+    
+    // 保存到本地存储
+    wx.setStorageSync('records', updatedRecords)
+    
+    // 更新页面数据
+    this.setData({
+      records: updatedRecords,
+      totalDays: updatedRecords.length,
+      currentRecord: {
+        studyContent: '',
+        harvest: ''
       }
     })
+    
+    wx.showToast({
+      title: '打卡成功',
+      icon: 'success'
+    })
   },
+  // 删除打卡记录
+  deleteRecord(e) {
+    const recordId = e.currentTarget.dataset.id
+    const updatedRecords = this.data.records.filter(record => record.id !== recordId)
+    
+    // 保存到本地存储
+    wx.setStorageSync('records', updatedRecords)
+    
+    // 更新页面数据
+    this.setData({
+      records: updatedRecords,
+      totalDays: updatedRecords.length
+    })
+    
+    wx.showToast({
+      title: '删除成功',
+      icon: 'success'
+    })
+  }
 })

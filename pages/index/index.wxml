@@ -1,27 +1,50 @@
 <!--index.wxml-->
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+    <!-- 打卡统计 -->
+    <view class="stats-container">
+      <view class="stat-item">
+        <text class="stat-number">{{totalDays}}</text>
+        <text class="stat-label">累计打卡天数</text>
+      </view>
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+    
+    <!-- 打卡表单 -->
+    <view class="form-container">
+      <text class="form-title">今日学习打卡</text>
+      <view class="form-item">
+        <text class="form-label">学习了什么</text>
+        <textarea class="form-input" placeholder="请输入学习内容" value="{{currentRecord.studyContent}}" bindinput="onStudyContentChange"></textarea>
+      </view>
+      <view class="form-item">
+        <text class="form-label">收获如何</text>
+        <textarea class="form-input" placeholder="请输入学习收获" value="{{currentRecord.harvest}}" bindinput="onHarvestChange"></textarea>
+      </view>
+      <button class="submit-btn" bindtap="submitRecord">提交打卡</button>
+    </view>
+    
+    <!-- 打卡记录 -->
+    <view class="records-container">
+      <text class="records-title">打卡记录</text>
+      <view wx:if="{{records.length === 0}}" class="no-records">
+        <text>暂无打卡记录</text>
+      </view>
+      <view wx:else class="records-list">
+        <view wx:for="{{records}}" wx:key="id" class="record-item">
+          <view class="record-header">
+            <text class="record-date">{{item.date}}</text>
+            <button class="delete-btn" bindtap="deleteRecord" data-id="{{item.id}}">删除</button>
+          </view>
+          <view class="record-content">
+            <text class="content-label">学习内容：</text>
+            <text class="content-text">{{item.studyContent}}</text>
+          </view>
+          <view class="record-harvest">
+            <text class="content-label">收获：</text>
+            <text class="content-text">{{item.harvest}}</text>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </scroll-view>
