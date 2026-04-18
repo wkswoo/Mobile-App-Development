@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/card/card",
     "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "校园海报墙",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",

@@ -1,27 +1,31 @@
 <!--index.wxml-->
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+    <!-- 搜索框 -->
+    <view class="search-box">
+      <input 
+        class="search-input" 
+        placeholder="搜索活动名称" 
+        bindinput="onSearchInput"
+        value="{{searchText}}"
+      />
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+    
+    <!-- 瀑布流海报墙 -->
+    <view class="poster-wall">
+      <view class="poster-list" wx:for="{{filteredPosters}}" wx:key="id">
+        <view class="poster-card">
+          <image class="poster-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="poster-content">
+            <text class="poster-title">{{item.title}}</text>
+            <view class="poster-info">
+              <text class="poster-date">{{item.date}}</text>
+              <text class="poster-location">{{item.location}}</text>
+              <text class="poster-club">{{item.club}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </scroll-view>
