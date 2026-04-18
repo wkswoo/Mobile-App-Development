@@ -109,7 +109,7 @@ page {
 /* 简介文本 */
 .bio-text {
   font-size: 28rpx;
-  color: #333;
+  color: #1A73E8;
   line-height: 40rpx;
   text-align: justify;
 }

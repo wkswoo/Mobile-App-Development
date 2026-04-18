@@ -24,7 +24,7 @@
     <view class="skills-section">
       <view class="section-title">个人技能</view>
       <view class="skills-container">
-        <view wx:for="{{skills}}" wx:key="index" class="skill-tag">
+        <view wx:for="{{skills}}" wx:key="index" class="skill-tag" bindtap="onSkillTap" data-skill="{{item}}">
           {{item}}
         </view>
       </view>

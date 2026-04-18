@@ -41,5 +41,17 @@ Page({
     
     // 个人简介
     bio: "热爱编程，积极向上，善于团队合作。希望在小程序开发领域不断学习和成长。"
+  },
+  
+  // 技能标签点击事件处理函数
+  onSkillTap: function(e) {
+    // 获取点击的技能名称
+    const skill = e.currentTarget.dataset.skill;
+    // 弹出提示
+    wx.showToast({
+      title: `你点击了：${skill}`,
+      icon: 'none',
+      duration: 2000
+    });
   }
 })
