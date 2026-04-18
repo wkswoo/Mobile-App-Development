@@ -27,5 +27,15 @@ Page({
     this.setData({
       filteredPosters: this.data.posters
     });
+  },
+  
+  // 预览图片
+  previewImage(e) {
+    const index = e.currentTarget.dataset.index;
+    const images = this.data.filteredPosters.map(item => item.image);
+    wx.previewImage({
+      current: images[index],
+      urls: images
+    });
   }
 });
