@@ -1,0 +1,12 @@
+<!-- poster-card.wxml -->
+<view class="poster-card">
+  <image class="poster-image" src="{{poster.image}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}"></image>
+  <view class="poster-content">
+    <text class="poster-title">{{poster.title}}</text>
+    <view class="poster-info">
+      <text class="poster-date">{{poster.date}}</text>
+      <text class="poster-location">{{poster.location}}</text>
+      <text class="poster-club">{{poster.club}}</text>
+    </view>
+  </view>
+</view>

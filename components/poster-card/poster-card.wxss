@@ -1,0 +1,62 @@
+/* poster-card.wxss */
+
+.poster-card {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.poster-image {
+  width: 100%;
+  height: 400rpx;
+}
+
+.poster-content {
+  padding: 16rpx;
+}
+
+.poster-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.poster-info {
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 44rpx;
+}
+
+.poster-date {
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.poster-location {
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.poster-club {
+  display: block;
+  color: #999999;
+}
+
+/* 适配不同屏幕尺寸 */
+@media (max-width: 375px) {
+  .poster-image {
+    height: 350rpx;
+  }
+}
+
+@media (min-width: 414px) {
+  .poster-image {
+    height: 450rpx;
+  }
+}

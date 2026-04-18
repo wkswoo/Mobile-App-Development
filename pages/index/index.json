@@ -1,4 +1,6 @@
 {
+  "navigationBarTitleText": "校园海报墙",
   "usingComponents": {
+    "poster-card": "../../components/poster-card/poster-card"
   }
 }
