@@ -72,6 +72,23 @@ Page({
       return;
     }
     
+    // 生成新海报数据
+    const newPoster = {
+      id: Date.now(),
+      image: this.data.images[0], // 使用第一张图片作为海报封面
+      title: this.data.title,
+      date: new Date().toISOString().split('T')[0],
+      location: '待定',
+      club: '用户'
+    };
+    
+    // 获取本地存储的海报数据
+    const posters = wx.getStorageSync('posters') || [];
+    // 添加新海报到数据中
+    posters.unshift(newPoster);
+    // 保存到本地存储
+    wx.setStorageSync('posters', posters);
+    
     // 模拟提交成功
     wx.showToast({
       title: '发布成功',

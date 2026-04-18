@@ -5,8 +5,8 @@ const { posterData } = require('../../data.js');
 Page({
   data: {
     searchText: '',
-    posters: posterData,
-    filteredPosters: posterData
+    posters: [],
+    filteredPosters: []
   },
   
   // 搜索输入事件
@@ -24,8 +24,23 @@ Page({
   // 生命周期函数
   onLoad() {
     // 初始化数据
+    this.loadPosters();
+  },
+  
+  // 页面显示时重新加载数据
+  onShow() {
+    this.loadPosters();
+  },
+  
+  // 加载海报数据
+  loadPosters() {
+    // 从本地存储中获取海报数据，如果没有则使用mock数据
+    const storedPosters = wx.getStorageSync('posters');
+    const posters = storedPosters && storedPosters.length > 0 ? storedPosters : posterData;
+    
     this.setData({
-      filteredPosters: this.data.posters
+      posters: posters,
+      filteredPosters: posters
     });
   },
   
