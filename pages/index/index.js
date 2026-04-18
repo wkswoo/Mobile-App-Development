@@ -34,9 +34,11 @@ Page({
   
   // 加载海报数据
   loadPosters() {
-    // 从本地存储中获取海报数据，如果没有则使用mock数据
-    const storedPosters = wx.getStorageSync('posters');
-    const posters = storedPosters && storedPosters.length > 0 ? storedPosters : posterData;
+    // 从本地存储中获取新发布的海报
+    const storedPosters = wx.getStorageSync('posters') || [];
+    
+    // 将mock数据和本地存储的新海报合并，本地存储的新海报在前面
+    const posters = [...storedPosters, ...posterData];
     
     this.setData({
       posters: posters,
